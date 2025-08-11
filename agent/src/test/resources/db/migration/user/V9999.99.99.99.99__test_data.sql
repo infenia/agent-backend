@@ -1,3 +1,17 @@
+/*
+ *
+ * Copyright (c) 2025 Infenia Technologies Pvt. Ltd.
+ *
+ * This file is part of the EasyMarry Application.
+ *
+ * Licensed under the Infenia license; you may not use this file except
+ * in compliance with the License. Unauthorized copying of this file,
+ * via any medium is strictly prohibited.
+ *
+ * For more information, contact arun@infenia.com
+ *
+ */
+
 -- User Record for testing
 INSERT INTO IUSER.USER_ACCOUNT (IDP_USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,MOBILE,MOBILE_VERIFIED,EMAIL,EMAIL_VERIFIED,WHATSAPP,WHATSAPP_VERIFIED,AADHAR_VERIFIED,AGENT_VERIFIED,IS_ACTIVE,IS_SUBSCRIPTION_ACTIVE,CREATED_BY,CREATED_AT,UPDATED_BY,UPDATED_AT,VERSION) VALUES ('ac7f680b-5737-483f-94c5-9063c78ae4ad', 'First', 'Middle', 'Last', '+911234567890', true, 'test@test.com', false, '+911234567890', true, false, true, true, false, 'TEST',CURRENT_TIMESTAMP, 'TEST',CURRENT_TIMESTAMP, 1);
 INSERT INTO IUSER.USER_ACCOUNT (IDP_USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,MOBILE,MOBILE_VERIFIED,EMAIL,EMAIL_VERIFIED,WHATSAPP,WHATSAPP_VERIFIED,AADHAR_VERIFIED,AGENT_VERIFIED,IS_ACTIVE,IS_SUBSCRIPTION_ACTIVE,CREATED_BY,CREATED_AT,UPDATED_BY,UPDATED_AT,VERSION) VALUES ('ac7f680b-5737-483f-94c5-9063c78ae4ae', 'First', 'Middle', 'Last', '+911234567891', true, 'tester@test.com', false, '+911234567891', true, false, true, true, false, 'TEST',CURRENT_TIMESTAMP, 'TEST',CURRENT_TIMESTAMP, 1);
