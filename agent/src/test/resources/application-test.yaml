@@ -1,0 +1,195 @@
+cache:
+  caffeine:
+    activityCacheName: activity
+    activityCacheInitialCapacity: 100
+    activityCacheMaximumSize: 1000
+    activityCacheExpireAfterWrite: 5
+    addressCacheName: address
+    adminControlCacheName: adminControl
+    coinCacheName: coin
+    cultureCacheName: culture
+    educationCacheName: education
+    familyCacheName: family
+    habitCacheName: habit
+    horoscopeCacheName: horoscope
+    identityCacheName: identity
+    idpuserCacheName: idpuser
+    imageCacheName: image
+    personalCacheName: personal
+    physiqueCacheName: physique
+    preferenceCacheName: preference
+    professionCacheName: profession
+    religionCacheName: religion
+    socialCacheName: social
+    subscriptionCacheName: subscription
+    trackerCacheName: tracker
+    userCacheName: user
+    userControlCacheName: userControl
+    videoCacheName: video
+    defaultInitialCapacity: 10
+    defaultMaximumSize: 100
+    defaultExpireAfterWrite: 300
+
+tracker:
+  profile:
+    strength:
+      weightage:
+        address: 10
+        coin: 0
+        culture: 0
+        education: 10
+        family: 10
+        habit: 0
+        horoscope: 10
+        identity: 0
+        image: 10
+        personal: 10
+        physique: 10
+        preference: 0
+        profession: 10
+        religion: 10
+        social: 0
+        subscription: 0
+        userControl: 10
+        video: 0
+
+common:
+  mode: development
+  restrictedFieldMaxUpdateCount: 2147483647
+
+db:
+  postgresql:
+    user:
+      driver: "pool"
+      protocol: "postgresql"
+      host: "localhost"
+      port: "5432"
+      user: "user"
+      password: "udhN2RMF8FPZVrAE7GkPSOUZs9kOLsmP9Yzx1h7wJQu1jIeCO95EVDsKrmiOtHuA"
+      database: "user"
+      schema: "iuser"
+    audit:
+      driver: "pool"
+      protocol: "postgresql"
+      host: "localhost"
+      port: "5432"
+      user: "user"
+      password: "udhN2RMF8FPZVrAE7GkPSOUZs9kOLsmP9Yzx1h7wJQu1jIeCO95EVDsKrmiOtHuA"
+      database: "audit"
+      schema: "audit"
+
+external:
+  service:
+    media:
+      url: "http://localhost:8081"
+
+idp:
+  keycloak:
+    baseUrl: "https://auth.local.infenia.in"
+    clientId: "easymarry"
+    clientSecret: "easymarry-secret"
+    realmName: "easymarry"
+    userIdAttributeName: "easymarryUserId"
+    updateDelay: 1000
+
+logging:
+  include-application-name: false
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    root: INFO
+    io.micrometer.tracing: INFO
+    org.flywaydb: INFO
+    io.r2dbc.postgresql.QUERY: INFO # for queries
+    io.r2dbc.postgresql.PARAM: INFO # for parameters
+
+management:
+  otlp:
+    tracing:
+      endpoint: http://127.0.0.1:43853/v1/traces
+      export:
+        enabled: true
+  server:
+    port: "9090"
+  endpoint:
+    health:
+      show-details: "always"
+      show-components: "always"
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "auditevents"
+          - "beans"
+          - "caches"
+          - "conditions"
+          - "configprops"
+          - "env"
+          - "flyway"
+          - "health"
+          - "httpexchanges"
+          - "info"
+          - "mappings"
+          - "metrics"
+          - "openapi"
+          - "sbom"
+          - "scheduledtasks"
+          - "sessions"
+          - "startup"
+          - "prometheus"
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    tags:
+      application: "user"
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+
+server:
+  max-http-request-header-size: 5MB
+
+spring:
+  application:
+    name: "user"
+  config:
+    import: optional:configserver:http://localhost:8888
+  docker:
+    compose:
+      enabled: false
+      file: "../devops/local/docker/docker-compose.yaml"
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+  output:
+    ansi:
+      enabled: "always"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "https://auth.local.infenia.in/realms/infenia/protocol/openid-connect/certs"
+  webflux:
+    problemdetails:
+      enabled: true
+
+  # TODO: explore these settings
+  #          audiences:
+  #            - "my-audience"
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: "/api-docs"
+  show-actuator: true
+  use-management-port: true

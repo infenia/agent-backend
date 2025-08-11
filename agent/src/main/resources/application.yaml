@@ -1,0 +1,109 @@
+logging:
+  include-application-name: false
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    root: INFO
+    io.micrometer.tracing: INFO
+    org.flywaydb: INFO
+    io.r2dbc.postgresql.QUERY: INFO # for queries
+    io.r2dbc.postgresql.PARAM: INFO # for parameters
+    com.infenia.easymarry.activity: INFO
+    com.infenia.easymarry.notification: INFO
+
+management:
+  otlp:
+    tracing:
+      endpoint: http://127.0.0.1:43853/v1/traces
+      export:
+        enabled: true
+  server:
+    port: "9090"
+  endpoint:
+    health:
+      show-details: "always"
+      show-components: "always"
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "auditevents"
+          - "beans"
+          - "caches"
+          - "conditions"
+          - "configprops"
+          - "env"
+          - "flyway"
+          - "health"
+          - "httpexchanges"
+          - "info"
+          - "mappings"
+          - "metrics"
+          - "openapi"
+          - "sbom"
+          - "scheduledtasks"
+          - "sessions"
+          - "startup"
+          - "prometheus"
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    tags:
+      application: "user"
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+
+server:
+  max-http-request-header-size: 5MB
+  compression:
+    enabled: true
+
+spring:
+  application:
+    name: "user"
+  config:
+    import: optional:configserver:http://localhost:8888
+  docker:
+    compose:
+      enabled: false
+      file: "../devops/local/docker/docker-compose.yaml"
+  jackson:
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+  output:
+    ansi:
+      enabled: "always"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "https://auth.local.infenia.in/realms/infenia/protocol/openid-connect/certs"
+  webflux:
+    problemdetails:
+      enabled: true
+
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+  
+  task:
+    execution:
+      pool:
+        core-size: 2
+        max-size: 4
+        queue-capacity: 50
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: "/api-docs"
+  show-actuator: true
+  use-management-port: true

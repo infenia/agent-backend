@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2024-2025 Infenia Private Limited. All rights reserved.
+  -->
+
+<configuration>
+
+
+    <!-- The following properties are used by Spring Boot configurations of
+       the logback stack. Defaults for these properties are set in "org/springframework/boot/logging/logback/defaults.xml".
+
+       You can simply google for the these file paths, e.g. "org/springframework/boot/logging/logback/defaults.xml"
+       and you will find the files in Spring Boot's github repository for inspection.
+
+       Note: you can override the defaults, simply by declaring the properties below
+       (uncomment and provide a custom value). Inspect the default values, to know
+       the format custom values should be provided in.
+
+       Also see:
+       - How to Configure Logback Logging: https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-configure-logback-for-logging
+       - Custom logback extensions: https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-logback-extensions
+     -->
+
+    <!-- Properties used in "org/springframework/boot/logging/logback/console-appender.xml" -->
+    <property name="PROJECT_ID" value="${PROJECT_ID:-default-project-id}"/>
+    <property name="LOG_APPENDER" value="${LOG_APPENDER:-CONSOLE}"/>
+
+    <!-- <property location="CONSOLE_LOG_PATTERN" value="..." /> -->
+    <!-- <property location="CONSOLE_LOG_CHARSET" value="..." /> -->
+
+    <!-- Properties used in "org/springframework/boot/logging/logback/file-appender.xml" -->
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+    <!--    <springProperty scope="context" location="LOG_FILE" source="LOG_FILE" defaultValue="logs/application.log" />-->
+
+    <!-- <property location="LOGBACK_ROLLINGPOLICY_FILE_NAME_PATTERN" value="..." /> -->
+    <!-- <property location="LOGBACK_ROLLINGPOLICY_CLEAN_HISTORY_ON_START" value="..." /> -->
+    <!-- <property location="LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE" value="..." /> -->
+    <!-- <property location="LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP" value="..." /> -->
+    <!-- <property location="LOGBACK_ROLLINGPOLICY_MAX_HISTORY" value="..." /> -->
+
+    <!-- Note: we are not using default FILE appender, but our own custom one. -->
+    <!-- <include resource="org/springframework/boot/logging/logback/file-appender.xml"
+      /> -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <appender name="GCP_JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <fieldName>timestamp</fieldName>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "logger": "%logger",
+                        "thread": "%thread",
+                        "message": "%message",
+                        "traceId": "%X{traceId}",
+                        "spanId": "%X{spanId}",
+                        "trace": "projects/${PROJECT_ID}/traces/%X{traceId}"
+                        }
+                    </pattern>
+                </pattern>
+                <stackTrace/>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!--    File created by referencing : https://github.com/FWinkler79/spring3-observability/blob/main/spring3-demo-server/src/main/resources/logback-spring.xml-->
+    <!--    <include resource="application-file-json-appender.xml"/>-->
+    <!--    <include resource="console-json-customized-appender.xml"/>-->
+    <!--    <include resource="console-json-sap-appender.xml"/>-->
+    <!--    <include resource="console-json-appender.xml"/>-->
+    <!--    <include resource="opentelemetry-appender.xml"/>-->
+
+    <!-- <property location="LOG_FILE" value="spring.log"/> <include resource="org/springframework/boot/logging/logback/file-appender.xml"/> -->
+
+
+    <appender name="LOKI"
+              class="com.github.loki4j.logback.Loki4jAppender">
+        <http>
+            <url>http://localhost:3100/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>app=user,host=${HOSTNAME},level=%level</pattern>
+            </label>
+            <message>
+                <pattern>
+                    -%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint}%clr(${LOG_LEVEL_PATTERN:-%5p})
+                    %clr(${PID:- }){magenta}
+                    %clr(---){faint}%clr(${LOGGED_APPLICATION_NAME:-}[%15.15t]){faint}%clr(${LOG_CORRELATION_PATTERN:-}){faint}%clr(%-40.40logger{39}){cyan}
+                    %clr(:){faint}%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+                </pattern>
+            </message>
+            <sortByTime>true</sortByTime>
+        </format>
+    </appender>
+
+    <!-- Root logger configuration -->
+    <root level="INFO">
+        <appender-ref ref="${LOG_APPENDER}"/>
+        <!--        <appender-ref ref="CONSOLE"/>-->
+        <!--        <appender-ref ref="APPLICATION-LOG-FILE"/>-->
+        <!--        <appender-ref ref="LOKI"/>-->
+        <!-- <appender-ref ref="CONSOLE-JSON" />            Log output to console in JSON format. -->
+        <!-- <appender-ref ref="CONSOLE-JSON-SAP" /> -->        <!-- Log output to console in SAP-specific JSON format. -->
+        <!-- <appender-ref ref="CONSOLE-JSON-CUSTOMIZED" /> --> <!-- Log output to console in custom JSON format. -->
+
+    </root>
+
+</configuration>

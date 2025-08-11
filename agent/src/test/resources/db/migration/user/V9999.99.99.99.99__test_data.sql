@@ -1,0 +1,26 @@
+-- User Record for testing
+INSERT INTO IUSER.USER_ACCOUNT (IDP_USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,MOBILE,MOBILE_VERIFIED,EMAIL,EMAIL_VERIFIED,WHATSAPP,WHATSAPP_VERIFIED,AADHAR_VERIFIED,AGENT_VERIFIED,IS_ACTIVE,IS_SUBSCRIPTION_ACTIVE,CREATED_BY,CREATED_AT,UPDATED_BY,UPDATED_AT,VERSION) VALUES ('ac7f680b-5737-483f-94c5-9063c78ae4ad', 'First', 'Middle', 'Last', '+911234567890', true, 'test@test.com', false, '+911234567890', true, false, true, true, false, 'TEST',CURRENT_TIMESTAMP, 'TEST',CURRENT_TIMESTAMP, 1);
+INSERT INTO IUSER.USER_ACCOUNT (IDP_USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,MOBILE,MOBILE_VERIFIED,EMAIL,EMAIL_VERIFIED,WHATSAPP,WHATSAPP_VERIFIED,AADHAR_VERIFIED,AGENT_VERIFIED,IS_ACTIVE,IS_SUBSCRIPTION_ACTIVE,CREATED_BY,CREATED_AT,UPDATED_BY,UPDATED_AT,VERSION) VALUES ('ac7f680b-5737-483f-94c5-9063c78ae4ae', 'First', 'Middle', 'Last', '+911234567891', true, 'tester@test.com', false, '+911234567891', true, false, true, true, false, 'TEST',CURRENT_TIMESTAMP, 'TEST',CURRENT_TIMESTAMP, 1);
+INSERT INTO IUSER.USER_ACCOUNT (IDP_USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,MOBILE,MOBILE_VERIFIED,EMAIL,EMAIL_VERIFIED,WHATSAPP,WHATSAPP_VERIFIED,AADHAR_VERIFIED,AGENT_VERIFIED,IS_ACTIVE,IS_SUBSCRIPTION_ACTIVE,CREATED_BY,CREATED_AT,UPDATED_BY,UPDATED_AT,VERSION) VALUES ('ac7f680b-5737-483f-94c5-9063c78ae4af', 'First', 'Middle', 'Last', '+911234567892', true, 'testertwo@test.com', false, '+911234567892', true, false, true, true, false, 'TEST',CURRENT_TIMESTAMP, 'TEST',CURRENT_TIMESTAMP, 1);
+INSERT INTO IUSER.USER_ACCOUNT (IDP_USER_ID,FIRST_NAME,MIDDLE_NAME,LAST_NAME,MOBILE,MOBILE_VERIFIED,EMAIL,EMAIL_VERIFIED,WHATSAPP,WHATSAPP_VERIFIED,AADHAR_VERIFIED,AGENT_VERIFIED,IS_ACTIVE,IS_SUBSCRIPTION_ACTIVE,CREATED_BY,CREATED_AT,UPDATED_BY,UPDATED_AT,VERSION) VALUES ('ac7f680b-5737-483f-94c5-9063c78ae4ag', 'First', 'Middle', 'Last', '+911234567893', true, 'testerthree@test.com', false, '+911234567893', true, false, true, true, false, 'TEST',CURRENT_TIMESTAMP, 'TEST',CURRENT_TIMESTAMP, 1);
+
+-- Admin control info for test users
+INSERT INTO iuser.admin_control (
+    user_id, admin_control_details, created_by, created_at, updated_by, updated_at, version
+) VALUES
+    (2, '{"isProfilePubliclyVisible":true,"isInteractionEnabled":true,"isAddressReviewed":true,"isCoinReviewed":true,"isCultureReviewed":true,"isEducationReviewed":true,"isFamilyReviewed":true,"isHabitReviewed":true,"isHoroscopeReviewed":true,"isIdentityReviewed":true,"isImageReviewed":true,"isPersonalReviewed":true,"isPhysiqueReviewed":true,"isPreferenceReviewed":true,"isProfessionReviewed":true,"isReligionReviewed":true,"isSocialReviewed":true,"isSubscriptionReviewed":true,"isUserReviewed":true,"isUserControlReviewed":true,"isVideoReviewed":true,"comment":"Test comment"}', 'TEST', CURRENT_TIMESTAMP, 'TEST', CURRENT_TIMESTAMP, 1),
+    (3, '{"isProfilePubliclyVisible":false,"isInteractionEnabled":false,"isAddressReviewed":false,"isCoinReviewed":false,"isCultureReviewed":false,"isEducationReviewed":false,"isFamilyReviewed":false,"isHabitReviewed":false,"isHoroscopeReviewed":false,"isIdentityReviewed":false,"isImageReviewed":false,"isPersonalReviewed":false,"isPhysiqueReviewed":false,"isPreferenceReviewed":false,"isProfessionReviewed":false,"isReligionReviewed":false,"isSocialReviewed":false,"isSubscriptionReviewed":false,"isUserReviewed":false,"isUserControlReviewed":false,"isVideoReviewed":false,"comment":"Another comment"}', 'TEST', CURRENT_TIMESTAMP, 'TEST', CURRENT_TIMESTAMP, 1);
+
+-- Tracker info for test users
+INSERT INTO iuser.tracker (
+    user_id, was_online_at, tracker_details, created_by, created_at, updated_by, updated_at, version
+) VALUES
+    (2, CURRENT_TIMESTAMP, '{"isAddressFilled":true,"isAdminControlFilled":true,"isCoinFilled":true,"isCultureFilled":true,"isEducationFilled":true,"isFamilyFilled":true,"isHabitFilled":true,"isHoroscopeFilled":true,"isIdentityFilled":true,"isImageFilled":true,"isPersonalInfoFilled":true,"isPhysiqueFilled":true,"isPreferenceFilled":true,"isProfessionFilled":true,"isReligionFilled":true,"isSocialFilled":true,"isSubscriptionFilled":true,"isUserControlFilled":true,"isVideoFilled":true}', 'TEST', CURRENT_TIMESTAMP, 'TEST', CURRENT_TIMESTAMP, 1),
+    (3, CURRENT_TIMESTAMP, '{"isAddressFilled":false,"isAdminControlFilled":false,"isCoinFilled":false,"isCultureFilled":false,"isEducationFilled":false,"isFamilyFilled":false,"isHabitFilled":false,"isHoroscopeFilled":false,"isIdentityFilled":false,"isImageFilled":false,"isPersonalInfoFilled":false,"isPhysiqueFilled":false,"isPreferenceFilled":false,"isProfessionFilled":false,"isReligionFilled":false,"isSocialFilled":false,"isSubscriptionFilled":false,"isUserControlFilled":false,"isVideoFilled":false}', 'TEST', CURRENT_TIMESTAMP, 'TEST', CURRENT_TIMESTAMP, 1);
+
+-- Personal info for test users
+INSERT INTO iuser.personal_information (
+    user_id, personal_details, created_by, created_at, updated_by, updated_at, version
+) VALUES
+    (2, '{"dateOfBirth":"1990-01-01T00:00:00Z","gender":"F","maritalStatus":"SINGLE","location":"Chennai"}', 'TEST', CURRENT_TIMESTAMP, 'TEST', CURRENT_TIMESTAMP, 1),
+    (3, '{"dateOfBirth":"1988-05-10T00:00:00Z","gender":"M","maritalStatus":"MARRIED","location":"Bangalore"}', 'TEST', CURRENT_TIMESTAMP, 'TEST', CURRENT_TIMESTAMP, 1);

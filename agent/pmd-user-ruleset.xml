@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright (c) 2024 Infenia Private Limited. All rights reserved.
+  -->
+
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         name="Custom Rules"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>
+        Custom rules
+    </description>
+
+
+    <rule ref="category/java/bestpractices.xml"/>
+
+
+    <!-- Code Style : Start -->
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="UseExplicitTypes"/>
+    </rule>
+    <rule ref="category/java/codestyle.xml/LongVariable">
+        <properties>
+            <property name="minimum" value="50"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="2"/>
+        </properties>
+    </rule>
+    <rule ref="category/java/codestyle.xml/TooManyStaticImports">
+        <properties>
+            <property name="maximumStaticImports" value="8"/>
+        </properties>
+    </rule>
+
+    <!-- Code Style : End -->
+
+    <!-- Design : Start -->
+    <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter"/>
+        <exclude name="LoosePackageCoupling"/>
+    </rule>
+    <!-- Design : End -->
+
+    <!--    <rule ref="category/java/documentation.xml"/>-->
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="TestClassWithoutTestCases"/>
+    </rule>
+
+    <rule ref="category/java/multithreading.xml"/>
+
+    <rule ref="category/java/performance.xml"/>
+
+    <rule ref="category/java/security.xml"/>
+
+</ruleset>

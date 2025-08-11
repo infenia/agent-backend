@@ -1,0 +1,44 @@
+-- Table: iuser.family
+
+DROP TABLE IF EXISTS iuser.family;
+
+CREATE TABLE IF NOT EXISTS iuser.family
+(
+    user_id bigint NOT NULL,
+    family_details jsonb NOT NULL,
+    created_by text COLLATE pg_catalog."default" NOT NULL,
+    created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_by text COLLATE pg_catalog."default" NOT NULL,
+    updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    version bigint NOT NULL,
+    CONSTRAINT family_pkey PRIMARY KEY (user_id),
+    CONSTRAINT family_user_id_fkey FOREIGN KEY (user_id)
+        REFERENCES iuser.user_account (user_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+COMMENT ON TABLE iuser.family
+    IS 'User Family Information Table';
+
+COMMENT ON COLUMN iuser.family.user_id
+    IS 'The User Id.';
+
+COMMENT ON COLUMN iuser.family.family_details
+    IS 'Details of relationships of the users in json format.';
+
+COMMENT ON COLUMN iuser.family.created_by
+    IS 'User Id or User Identified of who created the record.';
+
+COMMENT ON COLUMN iuser.family.created_at
+    IS 'Created time of the record.';
+
+COMMENT ON COLUMN iuser.family.updated_by
+    IS 'User Id or User Identified of who updated the record.';
+
+COMMENT ON COLUMN iuser.family.updated_at
+    IS 'Updated time of the record.';
+
+END;
