@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 ## Purpose
-Guidance for developing in the `user` module of Infenia EasyMarry backend (Java 21, Spring Boot 3.5, WebFlux, R2DBC, DDD).
+Guidance for developing in the `agent` module of Infenia EasyMarry backend (Java 21, Spring Boot 3.5, WebFlux, R2DBC, DDD).
 
 ---
 
@@ -9,35 +9,35 @@ Guidance for developing in the `user` module of Infenia EasyMarry backend (Java 
 
 ```bash
 # Build only this module
-./gradlew :user:build
+./gradlew :agent:build
 
-# Run only user module tests
-./gradlew :user:test
+# Run only agent module tests
+./gradlew :agent:test
 
-# Debug tests (user)
-./gradlew :user:test --debug
+# Debug tests (agent)
+./gradlew :agent:test --debug
 
 # Test coverage (all, or just this module if configured)
-./gradlew :user:jacocoTestReport
+./gradlew :agent:jacocoTestReport
 
 # PMD static analysis
-./gradlew :user:pmdMain
-./gradlew :user:pmdTest
+./gradlew :agent:pmdMain
+./gradlew :agent:pmdTest
 
 # Format code (Spotless)
-./gradlew :user:spotlessApply
+./gradlew :agent:spotlessApply
 
 # Check code formatting
-./gradlew :user:spotlessCheck
+./gradlew :agent:spotlessCheck
 
 # Lint/checkstyle (if configured)
-./gradlew :user:check
+./gradlew :agent:check
 
 # Dependency vulnerability scan
-./gradlew :user:dependencyCheckAnalyze
+./gradlew :agent:dependencyCheckAnalyze
 
 # List all available Gradle tasks for this module
-./gradlew :user:tasks
+./gradlew :agent:tasks
 ```
 
 ---
@@ -46,7 +46,7 @@ Guidance for developing in the `user` module of Infenia EasyMarry backend (Java 
 - **Immutability:** Use Java `record` or final classes. No setters or mutable fields.
 - **Reactive:** All code must be non-blocking (WebFlux, R2DBC). No `block()`, `subscribe()`, or blocking APIs.
 - **Error Handling:** Propagate errors via Reactor. Use centralized exception mapping.
-- **Domain-Driven:** Only shared user logic/entities. No service-specific code.
+- **Domain-Driven:** Only shared agent logic/entities. No service-specific code.
 - **Quality:**
 - Must pass PMD, Spotless, and all tests.
 - One return statement per method (PMD rule).
