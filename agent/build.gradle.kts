@@ -14,6 +14,20 @@
 
 plugins {
     id("com.infenia.springboot-webflux-r2dbc-conventions")
+    id("org.springframework.boot") 
+    id("io.spring.dependency-management") 
+    id("org.flywaydb.flyway") version "9.22.3"
+    kotlin("jvm") version "1.9.23"
+    kotlin("plugin.spring") version "1.9.23"
+
+
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/agent_backend"
+    user = "postgres"
+    password = "ImaVijayan07"
+    schemas = arrayOf("public")
 }
 
 springBoot {
@@ -30,6 +44,9 @@ springBoot {
 val keycloakVersion = "26.0.3"
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-webflux") // Only if your app uses WebFlux
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.postgresql:postgresql:42.7.4")
 }
 
 application {
