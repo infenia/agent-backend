@@ -51,4 +51,8 @@ dependencies {
     implementation("com.github.spotbugs:com.github.spotbugs.gradle.plugin:$spotBugsVersion")
     implementation("org.owasp.dependencycheck:org.owasp.dependencycheck.gradle.plugin:$owaspDependencycheck")
     implementation("org.sonarqube:org.sonarqube.gradle.plugin:$sonarqubeVersion")
+
+
+
+
 }
