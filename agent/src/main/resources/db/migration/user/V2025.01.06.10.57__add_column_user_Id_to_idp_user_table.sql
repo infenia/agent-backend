@@ -1,0 +1,25 @@
+/*
+ *
+ * Copyright (c) 2025 Infenia Technologies Pvt. Ltd.
+ *
+ * This file is part of the EasyMarry Application.
+ *
+ * Licensed under the Infenia license; you may not use this file except
+ * in compliance with the License. Unauthorized copying of this file,
+ * via any medium is strictly prohibited.
+ *
+ * For more information, contact arun@infenia.com
+ *
+ */
+
+ALTER TABLE iuser.idp_user
+ADD COLUMN em_id bigint;
+
+ALTER TABLE iuser.idp_user
+ADD CONSTRAINT idp_user_em_id_fkey
+FOREIGN KEY (em_id) REFERENCES iuser.user_account (user_id) MATCH SIMPLE
+ON UPDATE NO ACTION
+ON DELETE NO ACTION;
+
+COMMENT ON COLUMN iuser.idp_user.em_id
+    IS 'The EasyMarry Id of the user.'
