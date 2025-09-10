@@ -100,6 +100,7 @@ spring:
         core-size: 2
         max-size: 4
         queue-capacity: 50
+
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/agent_backend
     username: postgres
@@ -117,4 +118,6 @@ springdoc:
   use-management-port: true
 
 
+
   
+

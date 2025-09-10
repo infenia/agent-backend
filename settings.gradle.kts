@@ -12,6 +12,7 @@
  *
  */
 
+
  pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -21,12 +22,15 @@
 }
 
 
+
 // Configure all projects
 rootProject.name = "agent-backend"
 
 // Core modules
 include(
     ":agent",
+
 )
+
 
 
