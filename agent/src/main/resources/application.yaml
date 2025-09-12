@@ -103,8 +103,8 @@ spring:
 
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/agent_backend
-    username: postgres
-    password: ImaVijayan07
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   flyway:
     enabled: true
     baseline-on-migrate: true
