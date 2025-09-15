@@ -52,7 +52,4 @@ dependencies {
     implementation("org.owasp.dependencycheck:org.owasp.dependencycheck.gradle.plugin:$owaspDependencycheck")
     implementation("org.sonarqube:org.sonarqube.gradle.plugin:$sonarqubeVersion")
 
-
-
-
 }
