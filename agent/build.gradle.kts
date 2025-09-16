@@ -27,7 +27,7 @@ plugins {
 flyway {
     url = "jdbc:postgresql://localhost:5432/agent_backend"
     user = "postgres"
-    password = "ImaVijayan07"
+    password = "sulaiman123"
     schemas = arrayOf("public")
 
 }
