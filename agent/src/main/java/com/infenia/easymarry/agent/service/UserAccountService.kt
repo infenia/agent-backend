@@ -1,7 +1,7 @@
 package com.infenia.easymarry.agent.service
 
-import com.example.agent.model.UserAccount
-import com.example.agent.repository.UserAccountRepository
+import com.infenia.easymarry.agent.model.UserAccount
+import com.infenia.easymarry.agent.repository.UserAccountRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

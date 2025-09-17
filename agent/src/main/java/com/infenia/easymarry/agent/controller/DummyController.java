@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DummyController {
-    @GetMapping("/api/dummy")
-    public String dummyApi() {
-        return "This is a dummy API response ";
-    }
+  @GetMapping("/api/dummy")
+  public String dummyApi() {
+    return "This is a dummy API response ";
+  }
 }

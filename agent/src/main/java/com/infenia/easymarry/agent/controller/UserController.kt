@@ -1,7 +1,7 @@
 package com.infenia.easymarry.agent.controller
 
-import com.example.agent.model.UserAccount
-import com.example.agent.service.UserAccountService
+import com.infenia.easymarry.agent.model.UserAccount
+import com.infenia.easymarry.agent.service.UserAccountService
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono

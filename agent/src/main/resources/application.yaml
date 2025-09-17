@@ -102,7 +102,7 @@ spring:
         queue-capacity: 50
 
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/agent_backend
+    url: r2dbc:postgresql://localhost:5432/${DB_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   flyway:
