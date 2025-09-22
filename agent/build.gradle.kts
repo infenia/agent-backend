@@ -25,11 +25,10 @@ plugins {
 }
 
 flyway {
-    url = "jdbc:postgresql://localhost:5432/agent_backend"
-    user = "postgres"
-    password = "ImaVijayan07"
+    url = "jdbc:postgresql://localhost:5432/${System.getenv("DB_NAME") ?: "default_db"}"
+    user = System.getenv("DB_USERNAME") ?: "postgres"
+    password = System.getenv("DB_PASSWORD") ?: "postgres"
     schemas = arrayOf("public")
-
 }
 
 springBoot {
