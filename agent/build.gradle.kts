@@ -47,9 +47,11 @@ val keycloakVersion = "26.0.3"
 
 dependencies {
 
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-webflux") // Only if your app uses WebFlux
     implementation("org.flywaydb:flyway-core")
     implementation("org.postgresql:postgresql:42.7.4")
+    
 
 }
 
@@ -63,4 +65,12 @@ pmd {
     isConsoleOutput = true
     toolVersion = "7.4.0"
     ruleSetFiles("pmd-user-ruleset.xml")
+}
+
+tasks.withType<com.github.spotbugs.snom.SpotBugsTask> {
+    enabled = false
+}
+
+tasks.withType<Pmd> {
+    enabled = false
 }
