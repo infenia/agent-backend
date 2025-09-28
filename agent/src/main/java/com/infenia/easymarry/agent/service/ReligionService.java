@@ -18,4 +18,15 @@ public class ReligionService {
                 .map(Religion::getReligion)
                 .switchIfEmpty(Mono.just("religion not found"));
     }
+
+    public Mono<Religion> createReligion(Religion religion) {
+        return religionRepository.save(religion);
+    }
+
+    public Mono<Religion> updateReligion(Long userId, Religion religion) {
+        religion.setUserid(userId);
+        return religionRepository.save(religion);
+    }
+
+
 }

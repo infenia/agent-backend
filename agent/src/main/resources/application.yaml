@@ -16,7 +16,7 @@ management:
     tracing:
       endpoint: http://127.0.0.1:43853/v1/traces
       export:
-        enabled: true
+        enabled: false
   server:
     port: "9090"
   endpoint:
@@ -93,7 +93,7 @@ spring:
 
   lifecycle:
     timeout-per-shutdown-phase: 15s
-  
+
   task:
     execution:
       pool:
@@ -116,8 +116,3 @@ springdoc:
     path: "/api-docs"
   show-actuator: true
   use-management-port: true
-
-
-
-  
-
