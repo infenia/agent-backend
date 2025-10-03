@@ -6,9 +6,9 @@ db:
       host: "localhost"
       port: "5432"
       user: "postgres"
-      password: "intern@2025"
-      database: "agent"
-      schema: "agent"
+      password: "intern2025"
+      database: "agent_backend"
+      schema: "iuser"
       connectTimeout: 3
       statementTimeout: 20
       validationQuery: "SELECT 1"
@@ -126,6 +126,12 @@ springdoc:
     path: "/api-docs"
   show-actuator: true
   use-management-port: true
+
+
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=1000,expireAfterAccess=10m
 
 
 

@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 import reactor.core.publisher.Hooks;
@@ -27,6 +28,7 @@ import reactor.core.publisher.Hooks;
 @EnableAsync
 @Slf4j
 @EnableRetry
+@EnableCaching
 @SuppressWarnings("PMD.UseUtilityClass")
 public class AgentApplication {
 
