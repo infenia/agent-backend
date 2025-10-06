@@ -12,6 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface ReligionRepository extends ReactiveCrudRepository<Religion, Long> {
-    @Query("SELECT * FROM iuser.religion WHERE user_id = :userId")
-    Mono<Religion> findReligionByUserId(@Param("userId") Long userId); // Use Mono for reactive
+    //@Query("SELECT * FROM iuser.religion WHERE user_id = :userId")
+    //Mono<Religion> findReligionByUserId(@Param("userId") Long userId); // Use Mono for reactive
 }

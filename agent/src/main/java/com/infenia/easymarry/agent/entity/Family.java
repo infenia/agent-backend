@@ -1,6 +1,6 @@
 package com.infenia.easymarry.agent.entity;
 
-//import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,25 +8,23 @@ import org.springframework.data.annotation.*;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+
 import java.time.Instant;
+import java.util.Map;
 
-
-@Table(name = "iuser.religion")
+@Table(name = "iuser.family")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Religion {
+public class Family {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column("user_id")
     private Long userid;
 
-    private String religion;
-    private String caste;
-    @Column("sub_caste")
-    private String subcaste;
 
+    @Column("family_details")
+    private FamilyDetails familyDetails;
 
     @CreatedBy
     @Column("created_by")
@@ -43,4 +41,15 @@ public class Religion {
 
     @Version
     private long version;
+
+    @Column("family_type")
+    private String familyType;
+
+    @Column("family_class")
+    private String familyClass;
+    @Column("family_values")
+    private String familyValues;
+
+
+
 }
