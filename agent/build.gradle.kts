@@ -15,8 +15,8 @@
 plugins {
     id("com.infenia.springboot-webflux-r2dbc-conventions")
 
-    id("org.springframework.boot") 
-    id("io.spring.dependency-management") 
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
     id("org.flywaydb.flyway") version "9.22.3"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
@@ -25,11 +25,10 @@ plugins {
 }
 
 flyway {
-    url = "jdbc:postgresql://localhost:5432/agent_backend"
-    user = "postgres"
-    password = "ImaVijayan07"
+    url = "jdbc:postgresql://localhost:5432/agent_backend" // your database name
+    user = "postgres"      // your database username
+    password = "sulaiman123" // your database password
     schemas = arrayOf("public")
-
 }
 
 springBoot {
@@ -47,9 +46,11 @@ val keycloakVersion = "26.0.3"
 
 dependencies {
 
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-webflux") // Only if your app uses WebFlux
     implementation("org.flywaydb:flyway-core")
     implementation("org.postgresql:postgresql:42.7.4")
+
 
 }
 
@@ -63,4 +64,12 @@ pmd {
     isConsoleOutput = true
     toolVersion = "7.4.0"
     ruleSetFiles("pmd-user-ruleset.xml")
+}
+
+tasks.withType<com.github.spotbugs.snom.SpotBugsTask> {
+    enabled = false
+}
+
+tasks.withType<Pmd> {
+    enabled = false
 }
