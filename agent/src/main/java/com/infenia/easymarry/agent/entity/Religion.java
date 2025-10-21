@@ -1,46 +1,38 @@
 package com.infenia.easymarry.agent.entity;
 
-//import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.*;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
 
-
 @Table(name = "iuser.religion")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Religion {
+public record Religion(
+        @Id
+        @Column("user_id")
+        Long userid,
 
-    @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column("user_id")
-    private Long userid;
+        String religion,
+        String caste,
+        @Column("sub_caste")
+        String subcaste,
 
-    private String religion;
-    private String caste;
-    @Column("sub_caste")
-    private String subcaste;
+        @CreatedBy
+        @Column("created_by")
+        String createdBy,
 
+        @LastModifiedBy
+        @Column("updated_by")
+        String updatedBy,
 
-    @CreatedBy
-    @Column("created_by")
-    private String createdBy;
-    @LastModifiedBy
-    @Column("updated_by")
-    private String updatedBy;
-    @CreatedDate
-    @Column("created_at")
-    private Instant createdAt;
-    @LastModifiedDate
-    @Column("updated_at")
-    private Instant updatedAt;
+        @CreatedDate
+        @Column("created_at")
+        Instant createdAt,
 
-    @Version
-    private long version;
-}
+        @LastModifiedDate
+        @Column("updated_at")
+        Instant updatedAt,
+
+        @Version
+        long version
+) {}

@@ -1,55 +1,46 @@
 package com.infenia.easymarry.agent.entity;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.*;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-
 import java.time.Instant;
-import java.util.Map;
 
 @Table(name = "iuser.family")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Family {
+public record Family(
 
-    @Id
-    @Column("user_id")
-    private Long userid;
+        @Id
+        @Column("user_id")
+        Long userid,
 
+        @Column("family_details")
+        FamilyDetails familyDetails,
 
-    @Column("family_details")
-    private FamilyDetails familyDetails;
+        @CreatedBy
+        @Column("created_by")
+        String createdBy,
 
-    @CreatedBy
-    @Column("created_by")
-    private String createdBy;
-    @LastModifiedBy
-    @Column("updated_by")
-    private String updatedBy;
-    @CreatedDate
-    @Column("created_at")
-    private Instant createdAt;
-    @LastModifiedDate
-    @Column("updated_at")
-    private Instant updatedAt;
+        @LastModifiedBy
+        @Column("updated_by")
+        String updatedBy,
 
-    @Version
-    private long version;
+        @CreatedDate
+        @Column("created_at")
+        Instant createdAt,
 
-    @Column("family_type")
-    private String familyType;
+        @LastModifiedDate
+        @Column("updated_at")
+        Instant updatedAt,
 
-    @Column("family_class")
-    private String familyClass;
-    @Column("family_values")
-    private String familyValues;
+        @Version
+        long version,
 
+        @Column("family_type")
+        String familyType,
 
+        @Column("family_class")
+        String familyClass,
 
-}
+        @Column("family_values")
+        String familyValues
+) {}

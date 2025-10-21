@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import java.time.Instant;
+
 
 import java.util.List;
 
@@ -18,11 +20,7 @@ public class ReligionService {
         return religionRepository.findAll();
     }
 
-//    public Mono<String> getAllReligions(long userId) {
-//        return religionRepository.findReligionByUserId(userId)
-//                .map(Religion::getReligion)
-//                .switchIfEmpty(Mono.just("religion not found"));
-//    }
+
 
     public Mono<Religion> getReligionByUserId(Long userId) {
         return religionRepository.findById(userId)
@@ -34,14 +32,21 @@ public class ReligionService {
         return religionRepository.save(religion);
     }
 
-    public Mono<Religion> updateReligion(Long userId, Religion religion) {
+    public Mono<Religion> updateReligion(Long userId, Religion updated) {
         return religionRepository.findById(userId)
                 .flatMap(existing -> {
-                    existing.setReligion(religion.getReligion());
-                    existing.setCaste(religion.getCaste());
-                    existing.setSubcaste(religion.getSubcaste());
-                    existing.setUpdatedBy(religion.getUpdatedBy());
-                    return religionRepository.save(existing);
+                    Religion newReligion = new Religion(
+                            existing.userid(),
+                            updated.religion(),
+                            updated.caste(),
+                            updated.subcaste(),
+                            existing.createdBy(),
+                            updated.updatedBy(),
+                            existing.createdAt(),
+                            Instant.now(), // updatedAt
+                            existing.version()
+                    );
+                    return religionRepository.save(newReligion);
                 })
                 .switchIfEmpty(Mono.error(new RuntimeException("Religion not found for userId: " + userId)));
     }

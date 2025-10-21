@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+
 @Service
 public class FamilyService {
     @Autowired
@@ -26,17 +28,22 @@ public class FamilyService {
         return familyRepository.save(family);
     }
 
-    public Mono<Family> updateFamily(Long userId, Family family) {
+    public Mono<Family> updateFamily(Long userId, Family updated) {
         return familyRepository.findById(userId)
                 .flatMap(existing -> {
-                    // Update only the fields you want to change
-                    existing.setFamilyDetails(family.getFamilyDetails());
-                    existing.setFamilyType(family.getFamilyType());
-                    existing.setFamilyClass(family.getFamilyClass());
-                    existing.setFamilyValues(family.getFamilyValues());
-
-                    // Do NOT set createdBy or updatedBy manually
-                    return familyRepository.save(existing);
+                    Family newFamily = new Family(
+                            existing.userid(),
+                            updated.familyDetails(),
+                            existing.createdBy(),
+                            updated.updatedBy(),
+                            existing.createdAt(),
+                            Instant.now(),
+                            existing.version(),
+                            updated.familyType(),
+                            updated.familyClass(),
+                            updated.familyValues()
+                    );
+                    return familyRepository.save(newFamily);
                 })
                 .switchIfEmpty(Mono.error(new RuntimeException("Family not found with id " + userId)));
     }
